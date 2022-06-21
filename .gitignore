@@ -1,2 +1,4 @@
 .python-version
 .rasa
+*.tar.gz
+*.pyc
