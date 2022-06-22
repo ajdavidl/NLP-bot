@@ -32,3 +32,8 @@ stories:
     steps:
       - intent: translate
       - action: action_translate
+
+  - story: parse
+    steps:
+      - intent: parse
+      - action: action_parse

@@ -99,3 +99,14 @@ nlu:
       - Translate pt
       - translate en
       - Translate en
+
+  - intent: parse
+    examples: |
+      - parse
+      - parsing
+      - Parsing
+      - PARSE
+      - parse pt
+      - parsing pt
+      - parse en
+      - parsing en

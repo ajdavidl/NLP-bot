@@ -46,6 +46,8 @@
     padding-bottom: 4px;
     border-radius: 25px;
     max-width: 20rem;
+    text-align: left;
+    white-space: pre-wrap;
 }
 
 .usermsg{

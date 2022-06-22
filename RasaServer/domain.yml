@@ -9,6 +9,7 @@ intents:
   - mood_unhappy
   - bot_challenge
   - translate
+  - parse
 
 responses:
   utter_greet:
@@ -36,3 +37,4 @@ session_config:
 
 actions:
   - action_translate
+  - action_parse
