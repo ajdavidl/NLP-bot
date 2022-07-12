@@ -110,3 +110,13 @@ nlu:
       - parsing pt
       - parse en
       - parsing en
+
+  - intent: frequency
+    examples: |
+      - wordfreq
+      - Wordfreq
+      - frequency
+      - Frequency
+      - frequency en
+      - frequency pt
+      - frequency es

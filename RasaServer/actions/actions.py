@@ -35,6 +35,7 @@ from datetime import datetime, date, timedelta
 
 from textblob import TextBlob
 import spacy
+from wordfreq import word_frequency
 
 class translate(Action):
     def name(self) -> Text:
@@ -90,4 +91,22 @@ class parse(Action):
             text += token.text + ' → ' + token.pos_ + ' → ' + token.tag_ + ' → ' + token.dep_ + '\n'
         
         dispatcher.utter_message(text)
+        return []
+
+class wordFreq(Action):
+    def name(self) -> Text:
+        return "action_wordFreq"
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        
+        message = tracker.latest_message['text']
+        list_words = message.split(' ')
+        if len(list_words) < 3:
+            dispatcher.utter_message("Sorry, imcomplete query.")
+            return []
+        idioma = list_words[1]
+        word = list_words[2]
+        freq = word_frequency(word = word, lang = idioma)
+        dispatcher.utter_message(str(freq))
         return []

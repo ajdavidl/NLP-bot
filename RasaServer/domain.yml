@@ -10,6 +10,7 @@ intents:
   - bot_challenge
   - translate
   - parse
+  - frequency
 
 responses:
   utter_greet:
@@ -38,3 +39,4 @@ session_config:
 actions:
   - action_translate
   - action_parse
+  - action_wordFreq

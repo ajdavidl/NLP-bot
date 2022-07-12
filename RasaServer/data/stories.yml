@@ -37,3 +37,8 @@ stories:
     steps:
       - intent: parse
       - action: action_parse
+
+  - story: frequency
+    steps:
+      - intent: frequency
+      - action: action_wordFreq
