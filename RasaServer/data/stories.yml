@@ -42,3 +42,8 @@ stories:
     steps:
       - intent: frequency
       - action: action_wordFreq
+
+  - story: conceptnet
+    steps:
+      - intent: conceptnet
+      - action: action_conceptnet

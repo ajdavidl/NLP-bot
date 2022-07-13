@@ -120,3 +120,13 @@ nlu:
       - frequency en
       - frequency pt
       - frequency es
+
+  - intent: conceptnet
+    examples: |
+      - concept
+      - Concept
+      - Conceptnet
+      - conceptnet
+      - conceptnet en
+      - conceptnet pt
+      - conceptnet es
