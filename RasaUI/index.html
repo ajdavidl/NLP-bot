@@ -9,9 +9,59 @@
     <!-- <link rel="icon" href="img/icon.png" type="image/x-icon"> -->
     <!-- <link rel="stylesheet" href="style.css"> -->
     <title>NLP Bot</title>
+    <style>
+        body {
+            background-color: #ddd;
+            color: #444;
+        }
+        code {
+            font-family: monospace;
+        }
+        .css-ixhvoz {
+            background-color: #ccc;
+        }
+        css-s1wk8i:disabled, .css-s1wk8i.disabled {
+            background-color: #dfdfdf;
+        }
+        textarea.css-w3c9za:not(.fullHeight) {
+            background-color: #ddd;
+        }
+        .css-2gik0r {
+            background-color: #ddd;
+        }
+        
+    </style>
 </head>
 <body>
-    <div id="rasa-chat-widget" data-websocket-url="http://localhost:5005"></div>
+    <div id="rasa-chat-widget" data-websocket-url="http://localhost:5005" data-default-open="true"
+    data-height="800" data-width="600"></div>
     <script src="https://unpkg.com/@rasahq/rasa-chat" type="application/javascript"></script>
-    
+    <h1>NLP Bot</h1>
+    <h2>Parsing</h2>
+    <p>Sintax: parsing [language] [sentence]</p>
+    <p>Examples:</p>
+    <code>
+        parse en I like Natural Language Processing. <br>
+        parsing pt Eu gosto de Processamento de Linguagem Natural.
+    </code>
+    <h2>Translation</h2>
+    <p>Sintax: translate [language from] [language to] [sentence]</p>
+    <code>
+        translate en pt I am a bot. <br>
+        translate pt de Sou um robô.
+    </code>
+    <h2>Conceptnet</h2>
+    <p>Sintax: concept [language] [word]</p>
+    <code>
+        concept en word <br>
+        concept pt palavra <br>
+        concept es palabra <br>
+    </code>
+    <h2>Word frequency</h2>
+    <p>Sintax: freq [language] [word]</p>
+    <code>
+        freq en the <br>
+        freq en house <br>
+        freq pt casa
+    </code>
 </body>
