@@ -52,3 +52,8 @@ stories:
     steps:
       - intent: definition
       - action: action_definition
+
+  - story: wikipedia
+    steps:
+      - intent: wikipedia
+      - action: action_wikipedia

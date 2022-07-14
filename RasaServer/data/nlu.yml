@@ -141,3 +141,12 @@ nlu:
       - Define pt
       - definition es
       - Definition de
+
+  - intent: wikipedia
+    examples: |
+      - wiki en
+      - Wiki pt
+      - wikipedia en
+      - Wikipedia pt
+      - wiki es
+      - wiki de

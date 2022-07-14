@@ -13,6 +13,7 @@ intents:
   - frequency
   - conceptnet
   - definition
+  - wikipedia
 
 responses:
   utter_greet:
@@ -44,3 +45,4 @@ actions:
   - action_wordFreq
   - action_conceptnet
   - action_definition
+  - action_wikipedia

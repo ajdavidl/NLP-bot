@@ -38,6 +38,8 @@ import spacy
 from wordfreq import word_frequency
 import requests
 from wiktionaryparser import WiktionaryParser
+import wikipedia
+import wikipediaapi
 
 
 class translate(Action):
@@ -212,4 +214,30 @@ class wiktionary(Action):
         text = self.wiktionary(idioma, query)
         dispatcher.utter_message(text)
 
+        return []
+
+
+class wikipedia_(Action):
+    def name(self) -> Text:
+        return "action_wikipedia"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        message = tracker.latest_message['text']
+        list_words = message.split(' ')
+        idioma = list_words[1]
+        query = ' '.join(list_words[2:])
+
+        wikipedia.set_lang(idioma)
+        results = wikipedia.search(query)
+        if len(results) == 0:
+            dispatcher.utter_message("Page not found!")
+            return []
+        wiki_wiki = wikipediaapi.Wikipedia(idioma)
+        page = wiki_wiki.page(results[0])
+        if 'may refer to' in page.summary:
+            page = wiki_wiki.page(results[1])
+        dispatcher.utter_message(page.summary)
         return []
