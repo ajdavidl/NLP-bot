@@ -37,7 +37,7 @@ from textblob import TextBlob
 import spacy
 from wordfreq import word_frequency
 import requests
-import time
+from wiktionaryparser import WiktionaryParser
 
 
 class translate(Action):
@@ -159,4 +159,57 @@ class conceptnet(Action):
         text = self.conceptnetQuery(idioma, word, number)
 
         dispatcher.utter_message(text)
+        return []
+
+
+class wiktionary(Action):
+    def name(self) -> Text:
+        return "action_definition"
+
+    def wiktionary(self, lang, query):
+        if lang == 'pt':
+            lang = 'portuguese'
+        elif lang == 'en':
+            lang = 'english'
+        elif lang == 'es':
+            lang = 'spanish'
+        elif lang == 'it':
+            lang = 'italian'
+        elif lang == 'fr':
+            lang = 'french'
+        elif lang == 'de':
+            lang = 'german'
+        else:
+            lang = 'english'
+        parser = WiktionaryParser()
+        parser.set_default_language(lang)
+        try:
+            data = parser.fetch(query)
+        except Exception as e:
+            return "Sorry! Error in wiktionary package!!"
+        if len(data) > 0:
+            if 'definitions' in data[0].keys():
+                if len(data[0]['definitions']) > 0:
+                    definitions = data[0]['definitions'][0]['text']
+                    text = "Definitions: "
+                    for i in range(len(definitions)):
+                        text += data[0]['definitions'][0]['text'][i]+'\n'
+                    return text
+                else:
+                    return "No text inside definitions data from wiktionary."
+            else:
+                return "No definitions found in wiktionary data."
+        else:
+            return "Empty data from wiktionary."
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        message = tracker.latest_message['text']
+        list_words = message.split(' ')
+        idioma = list_words[1]
+        query = list_words[2]
+        text = self.wiktionary(idioma, query)
+        dispatcher.utter_message(text)
+
         return []

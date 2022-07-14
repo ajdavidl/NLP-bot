@@ -47,3 +47,8 @@ stories:
     steps:
       - intent: conceptnet
       - action: action_conceptnet
+
+  - story: definition
+    steps:
+      - intent: definition
+      - action: action_definition

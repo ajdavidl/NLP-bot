@@ -130,3 +130,14 @@ nlu:
       - conceptnet en
       - conceptnet pt
       - conceptnet es
+
+  - intent: definition
+    examples: |
+      - define
+      - Define
+      - definition
+      - Definition
+      - define en
+      - Define pt
+      - definition es
+      - Definition de

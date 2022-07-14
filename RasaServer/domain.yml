@@ -12,6 +12,7 @@ intents:
   - parse
   - frequency
   - conceptnet
+  - definition
 
 responses:
   utter_greet:
@@ -42,3 +43,4 @@ actions:
   - action_parse
   - action_wordFreq
   - action_conceptnet
+  - action_definition
