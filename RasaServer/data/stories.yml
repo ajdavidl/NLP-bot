@@ -57,3 +57,8 @@ stories:
     steps:
       - intent: wikipedia
       - action: action_wikipedia
+
+  - story: text_generation_bloom
+    steps:
+      - intent: text_generation_bloom
+      - action: action_text_generation_bloom

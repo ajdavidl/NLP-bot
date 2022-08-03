@@ -40,6 +40,10 @@ import requests
 from wiktionaryparser import WiktionaryParser
 import wikipedia
 import wikipediaapi
+from transformers import pipeline
+
+TextGenerationBloom = pipeline(
+    "text-generation", model="bigscience/bloom-760m")
 
 
 class translate(Action):
@@ -240,4 +244,24 @@ class wikipedia_(Action):
         if 'may refer to' in page.summary:
             page = wiki_wiki.page(results[1])
         dispatcher.utter_message(page.summary)
+        return []
+
+
+class text_generation_bloom(Action):
+    def name(self) -> Text:
+        return "action_text_generation_bloom"
+
+    def generate_text(self, textSeed, textSize=80):
+        result = TextGenerationBloom(textSeed, max_length=textSize,
+                                     num_return_sequences=1)
+        return(result[0]['generated_text'])
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        message = tracker.latest_message['text']
+        list_words = message.split(' ')
+        text = ' '.join(list_words[1:])
+        textOutput = self.generate_text(text)
+        dispatcher.utter_message(textOutput)
         return []

@@ -150,3 +150,10 @@ nlu:
       - Wikipedia pt
       - wiki es
       - wiki de
+
+  - intent: text_generation_bloom
+    examples: |
+      - bloom
+      - BLOOM
+      - Bloom
+      - text_generate_bloom
