@@ -43,7 +43,9 @@ import wikipediaapi
 from transformers import pipeline
 
 TextGenerationBloom = pipeline(
-    "text-generation", model="bigscience/bloom-760m")
+    "text-generation", model="bigscience/bloom-1b1")
+
+Unmasker = pipeline('fill-mask', model='bert-base-multilingual-cased')
 
 
 class translate(Action):
@@ -263,5 +265,30 @@ class text_generation_bloom(Action):
         list_words = message.split(' ')
         text = ' '.join(list_words[1:])
         textOutput = self.generate_text(text)
+        dispatcher.utter_message(textOutput)
+        return []
+
+
+class bert_fill_mask(Action):
+    def name(self) -> Text:
+        return "action_bert_fill_mask"
+
+    def bert(self, masked_sentence):
+        if "[MASK]" not in masked_sentence:
+            return("Token [MASK] not found.")
+        solutions = Unmasker(masked_sentence)
+        outputText = masked_sentence + "\n"
+        for dic in solutions:
+            outputText = outputText + \
+                dic["sequence"] + " - " + str(dic["score"]) + "\n"
+        return(outputText)
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        message = tracker.latest_message['text']
+        list_words = message.split(' ')
+        text = ' '.join(list_words[1:])
+        textOutput = self.bert(text)
         dispatcher.utter_message(textOutput)
         return []

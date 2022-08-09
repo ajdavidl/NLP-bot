@@ -157,3 +157,12 @@ nlu:
       - BLOOM
       - Bloom
       - text_generate_bloom
+
+  - intent: bert_fill_mask
+    examples: |
+      - bert_fill_mask
+      - fill_mask
+      - fillmask
+      - BERT_FILL_MASK
+      - BertFillMask
+      - FillMask

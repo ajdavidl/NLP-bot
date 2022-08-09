@@ -62,3 +62,8 @@ stories:
     steps:
       - intent: text_generation_bloom
       - action: action_text_generation_bloom
+
+  - story: bert_fill_mask
+    steps:
+      - intent: bert_fill_mask
+      - action: action_bert_fill_mask
