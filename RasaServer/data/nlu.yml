@@ -166,3 +166,17 @@ nlu:
       - BERT_FILL_MASK
       - BertFillMask
       - FillMask
+
+  - intent: news
+    examples: |
+      - news
+      - NEWS
+      - News
+      - noticias
+      - Noticias
+      - news en
+      - news pt
+      - news es
+      - news it
+      - news fr
+      - news de

@@ -67,3 +67,8 @@ stories:
     steps:
       - intent: bert_fill_mask
       - action: action_bert_fill_mask
+
+  - story: news
+    steps:
+      - intent: news
+      - action: action_news

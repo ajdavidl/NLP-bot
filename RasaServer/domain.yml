@@ -16,6 +16,7 @@ intents:
   - wikipedia
   - text_generation_bloom
   - bert_fill_mask
+  - news
 
 responses:
   utter_greet:
@@ -50,3 +51,4 @@ actions:
   - action_wikipedia
   - action_text_generation_bloom
   - action_bert_fill_mask
+  - action_news

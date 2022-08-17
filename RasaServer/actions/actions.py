@@ -27,7 +27,6 @@
 #         return []
 
 from typing import Any, Text, Dict, List
-#
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import UserUtteranceReverted
@@ -41,6 +40,8 @@ from wiktionaryparser import WiktionaryParser
 import wikipedia
 import wikipediaapi
 from transformers import pipeline
+import feedparser
+import re
 
 TextGenerationBloom = pipeline(
     "text-generation", model="bigscience/bloom-1b1")
@@ -292,3 +293,59 @@ class bert_fill_mask(Action):
         textOutput = self.bert(text)
         dispatcher.utter_message(textOutput)
         return []
+
+
+class news(Action):
+    def name(self) -> Text:
+        return "action_news"
+
+    def strip_html_tags(self, text):
+        p = re.compile(r'<.*?>')
+        return p.sub('', text)
+
+    def retorna_noticias(self, url):
+        title = []
+        try:
+            NewsFeed = feedparser.parse(url)
+            for d in NewsFeed.entries:
+                tit = d['title']
+                tit = self.strip_html_tags(tit)
+                title.append(tit)
+        except:
+            print("Erro em ", url)
+        return(title)
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        message = tracker.latest_message['text']
+        list_words = message.split(' ')
+        lang = list_words[1]
+        nr = None
+        if len(list_words) == 3:
+            nr = int(list_words[2])
+        if lang == 'pt':
+            url = "https://news.google.com/rss/topics/CAAqKggKIiRDQkFTRlFvSUwyMHZNRGx1YlY4U0JYQjBMVUpTR2dKQ1VpZ0FQAQ?hl=pt-BR&gl=BR&ceid=BR%3Apt-419"
+        elif lang == 'en':
+            url = "https://news.google.com/rss/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRGx1YlY4U0FtVnVHZ0pWVXlnQVAB?hl=en-US&gl=US&ceid=US:en"
+        elif lang == 'es':
+            url = "https://news.google.com/rss/topics/CAAqLAgKIiZDQkFTRmdvSUwyMHZNRGx1YlY4U0JtVnpMVFF4T1JvQ1ZWTW9BQVAB?hl=es-419&gl=US&ceid=US%3Aes-419"
+        elif lang == 'it':
+            url = "https://news.google.com/rss/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRGx1YlY4U0FtbDBHZ0pKVkNnQVAB?hl=it&gl=IT&ceid=IT%3Ait"
+        elif lang == 'fr':
+            url = "https://news.google.com/rss/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRGx1YlY4U0FtWnlHZ0pHVWlnQVAB?hl=fr&gl=FR&ceid=FR%3Afr"
+        elif lang == 'de':
+            url = "https://news.google.com/rss/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRGx1YlY4U0FtUmxHZ0pFUlNnQVAB?hl=de&gl=DE&ceid=DE%3Ade"
+        elif lang == 'ro':
+            url = "https://news.google.com/rss/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRGx1YlY4U0FuSnZHZ0pTVHlnQVAB?hl=ro&gl=RO&ceid=RO%3Aro"
+        else:
+            dispatcher.utter_message("Language not available to me.")
+            return []
+        listNews = self.retorna_noticias(url)
+        if nr != None:
+            listNews = listNews[:nr]
+        outputText = "News:\n"
+        for n in listNews:
+            outputText = outputText + n + "\n\n"
+        dispatcher.utter_message(outputText)
+        return[]
