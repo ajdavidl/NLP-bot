@@ -1,0 +1,9 @@
+feedparser
+rasa
+spacy
+textblob
+transformers
+wikipedia
+wikipediaapi
+wiktionaryparser
+wordfreq
