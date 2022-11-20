@@ -12,7 +12,7 @@ A chatbot that performs simple nlp tasks.
 Create an python enviroment. Install rasa and other dependencies with following command:
 
 ```python
-pip install -r requirements
+pip install -r requirements.txt
 ```
 
 Clone the repository.
