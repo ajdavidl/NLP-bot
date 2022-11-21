@@ -14,6 +14,15 @@ Create an python enviroment. Install rasa and other dependencies with following 
 ```python
 pip install -r requirements.txt
 ```
+After that you may need some SpaCy models to use the parse functionality.
+
+```bash
+python -m spacy download en_core_web_sm
+python -m spacy download pt_core_news_sm
+python -m spacy download es_core_news_sm
+python -m spacy download it_core_news_sm
+python -m spacy download fr_core_news_sm
+```
 
 Clone the repository.
 
