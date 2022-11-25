@@ -2,7 +2,8 @@
 
 A chatbot that performs simple nlp tasks.
 
-![python](https://img.shields.io/badge/Python-3776AB?style=flat&labelColor=FFD43B&logoColor=3776AB&logo=python)
+<!-- ![python](https://img.shields.io/badge/Python-3776AB?style=flat&labelColor=FFD43B&logoColor=3776AB&logo=python) -->
+[![Python 3.9](https://img.shields.io/badge/python-3.9-blue.svg)](https://www.python.org/downloads/release/python-3913/)
 ![Rasa](https://img.shields.io/badge/Rasa-6200F5?style=flat&labelColor=6200F5&logoColor=whitesmoke&logo=Rasa)
 ![SpaCy](https://img.shields.io/badge/SpaCy-0A84FF?style=flat&labelColor=0A84FF&logoColor=whitesmoke&logo=SpaCy)
 
